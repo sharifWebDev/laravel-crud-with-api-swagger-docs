@@ -9,6 +9,7 @@
                 data-delete-url="{{ url('api/v1/students/destroy') }}/:id"
                 data-show-url="{{ route('admin.students.show', ':id') }}"
                 data-fields='["name", "roll", "is_active"]'
+                data-headers='["Name", "Roll", "Active Status"]'
                 data-export="true"
                 data-colvis="true"
                 data-csv="true"
@@ -20,3 +21,17 @@
             </table>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            
+            dtHelpers.registerRenderer('Student', 'is_active', function(data, row) { 
+                if(data == 1) {
+                    return '<span class="badge badge-success">Active</span>';
+                } else {
+                    return '<span class="badge badge-danger">Inactive</span>';
+                }
+            });
+
+        });
+    </script>
