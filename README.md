@@ -1,61 +1,225 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Student Management API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a Laravel-based Student Management API with full **Swagger/OpenAPI documentation** using [darkaonline/l5-swagger](https://github.com/DarkaOnLine/L5-Swagger).
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Installation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. Clone the repository:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+git clone https://github.com/sharifWebDev/laravel-crud-with-api-swagger-docs.git
+cd laravel-crud-with-api-swagger-docs
+```
 
-## Learning Laravel
+2. Install PHP dependencies:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+composer install
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Environment Setup
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Copy `.env.example` to `.env`:
 
-## Laravel Sponsors
+```bash
+cp .env.example .env
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. Generate application key:
 
-### Premium Partners
+```bash
+php artisan key:generate
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3. Set database credentials in `.env`:
 
-## Contributing
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Add Swagger host constant in `.env`:
 
-## Code of Conduct
+```env
+L5_SWAGGER_CONST_HOST=http://127.0.0.1:8000
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## Database Setup
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Run migrations:
 
-## License
+```bash
+php artisan migrate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+2. (Optional) or import database .sql file
+
+---
+
+## Run the Application
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+Access the app at:
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+
+### Access Swagger UI
+
+Open in browser:
+
+```
+http://127.0.0.1:8000/api/documentation
+```
+
+---
+
+
+## API Endpoint screenshot:
+
+Student List:
+
+![alt text](image.png)
+![alt text](image-1.png)
+
+Create Student/Post
+![alt text](image-2.png)
+
+Find student/Get by id
+![alt text](image-3.png)
+
+Update Student/put
+![alt text](image-4.png)
+
+Delete student/delete
+![alt text](image-5.png)
+
+
+
+
+
+
+##  Setup Swagger:
+## Swagger Documentation
+
+This app uses **L5-Swagger** for API documentation.
+
+### 1. Install L5-Swagger
+
+```bash
+composer require "darkaonline/l5-swagger"
+```
+
+### 2. Publish configuration
+
+```bash
+php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+```
+
+### 3. Add global Swagger info
+
+Create `app/Swagger/SwaggerInfo.php`:
+
+```php
+<?php
+
+namespace App\Swagger;
+
+/**
+ * @OA\Info(
+ *     title="My Laravel API",
+ *     version="1.0.0",
+ *     description="API documentation for Laravel project",
+ *     @OA\Contact(email="support@example.com")
+ * )
+ *
+ * @OA\Server(
+ *     url=L5_SWAGGER_CONST_HOST,
+ *     description="Local Laravel API Server"
+ * )
+ *
+ * @OA\Tag(
+ *     name="Students",
+ *     description="Operations related to student management"
+ * )
+ */
+class SwaggerInfo {}
+```
+
+### 4. Configure `l5-swagger.php`
+
+In `config/l5-swagger.php`, include:
+
+```php
+'paths' => [
+    'annotations' => [
+        base_path('app/Http/Controllers'),
+        base_path('app/Swagger'),
+    ],
+],
+'constants' => [
+    'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://127.0.0.1:8000'),
+],
+```
+
+### 5. Generate Swagger documentation
+
+```bash
+php artisan l5-swagger:generate
+```
+
+### 6. Access Swagger UI
+
+Open in browser:
+
+```
+http://127.0.0.1:8000/api/documentation
+```
+
+---
+
+## API Endpoints
+
+| Method | Endpoint              | Controller                | Description                      |
+| ------ | --------------------- | ------------------------- | -------------------------------- |
+| GET    | /api/v1/students      | StudentController@index   | Get list of students (paginated) |
+| POST   | /api/v1/students      | StudentController@store   | Create a new student             |
+| GET    | /api/v1/students/{id} | StudentController@find    | Get student by ID                |
+| PUT    | /api/v1/students/{id} | StudentController@update  | Update student by ID             |
+| DELETE | /api/v1/students/{id} | StudentController@destroy | Delete student by ID             |
+
+---
+
+## Notes
+
+* Make sure all controller methods have **L5-Swagger annotations (`@OA\*`)**.
+* Ensure routes match exactly the `path` in the annotations.
+* Use **pagination query params** (`page`, `per_page`) for listing endpoints.
+
+---
+
+This README provides a **full setup** for installing the Laravel app, running it, and generating Swagger API documentation.
+
+---
+
+I can also create a **ready-to-use markdown section for each CRUD method** with example requests/responses for Swagger UI, so your README doubles as a mini API doc.
+
+Do you want me to do that?
