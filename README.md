@@ -113,7 +113,8 @@ Delete student/delete
 ![alt text](image-5.png)
 
 
-
+## Student List:
+![alt text](image-6.png)
 
 
 
