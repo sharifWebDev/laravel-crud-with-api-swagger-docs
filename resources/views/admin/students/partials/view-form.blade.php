@@ -3,7 +3,7 @@
         <div class="mb-3 col-12 col-md-4 col-lg-3">
             <div class="form-group">
                 <label for="name">Name</label><br><input type="text" name="name"
-                    class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $query->name ?? '') }}"
+                    class="form-control @error('name') is-invalid @enderror" value="{{ old('full_name', $query->name ?? '') }}"
                     placeholder="Enter Name..." id="view_name" disabled>
                 @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>

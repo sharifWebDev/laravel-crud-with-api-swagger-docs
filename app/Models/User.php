@@ -29,9 +29,21 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'unique_id',
+        'full_name',
         'email',
         'password',
+        'auth_type',
+        'phone_country_code',
+        'phone_number',
+        'profile_img',
+        'app_version',
+        'ip_address',
+        'firebase_id',
+        'acc_status',
+        'delete_requested_at',
+        'email_verified_at',
+        'last_login_at',
     ];
 
     /**
@@ -65,6 +77,50 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'delete_requested_at' => 'datetime',
+            'last_login_at' => 'datetime',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
         ];
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if (empty($user->unique_id)) {
+                $user->unique_id = static::generateUniqueId();
+            }
+        });
+    }
+
+    private static function generateUniqueId(): string
+    {
+        do {
+            $uniqueId = str_pad(random_int(0, 99999999), 8, '0', STR_PAD_LEFT);
+        } while (static::where('unique_id', $uniqueId)->exists());
+
+        return $uniqueId;
+    }
+
+    public function otps()
+    {
+        return $this->hasMany(Otp::class);
+    }
+
+    public function quizResults()
+    {
+        return $this->hasMany(QuizResult::class);
+    }
+
+    public function isPendingDeletion(): bool
+    {
+        return $this->acc_status === 'pending_deletion';
+    }
+
+    public function isDeleted(): bool
+    {
+        return $this->acc_status === 'deleted';
     }
 }

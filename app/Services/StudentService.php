@@ -27,7 +27,7 @@ class StudentService
 
         $columns = [
             0 => 'id',
-            1 => 'name',
+            1 => 'full_name',
             2 => 'roll',
             3 => 'is_active',
             4 => 'created_by',

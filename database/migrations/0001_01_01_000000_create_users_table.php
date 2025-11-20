@@ -13,13 +13,26 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+
+            $table->string('unique_id', 8)->unique();
+            $table->string('full_name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->enum('auth_type', ['gmail', 'apple', 'email_pass']);
+            $table->string('phone_country_code')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->text('profile_img')->nullable();
+            $table->string('app_version')->nullable();
+            $table->string('ip_address')->nullable();
+            $table->string('firebase_id');
+            $table->enum('acc_status', ['active', 'pending_deletion', 'deleted'])->default('active');
+            $table->timestamp('delete_requested_at')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->timestamp('last_login_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
 

@@ -12,7 +12,7 @@ class Student extends Model
 
     protected $table = 'students';
 
-    protected $fillable = ['name', 'roll', 'photo', 'is_active', 'created_by', 'updated_by', 'deleted_at'];
+    protected $fillable = ['full_name', 'roll', 'photo', 'is_active', 'created_by', 'updated_by', 'deleted_at'];
 
     public function scopeActive($query)
     {

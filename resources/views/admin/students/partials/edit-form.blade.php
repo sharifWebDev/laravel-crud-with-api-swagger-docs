@@ -7,7 +7,7 @@
             <div class="form-group">
                 <label for="name">Name</label><br>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                    value="{{ old('name', $query->name ?? '') }}" placeholder="Enter Name..." id="edit_name" required>
+                    value="{{ old('full_name', $query->name ?? '') }}" placeholder="Enter Name..." id="edit_name" required>
                 @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
