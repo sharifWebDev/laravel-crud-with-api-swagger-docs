@@ -19,15 +19,20 @@ class QuizController extends Controller
      *     description="Retrieve all active quiz categories with quiz counts",
      *     tags={"Quiz"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Categories retrieved successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Categories retrieved successfully."),
      *             @OA\Property(property="data", type="object",
      *                 @OA\Property(property="categories", type="array",
+     *
      *                     @OA\Items(type="object",
+     *
      *                         @OA\Property(property="id", type="integer", example=1),
      *                         @OA\Property(property="name", type="string", example="General Knowledge"),
      *                         @OA\Property(property="description", type="string", example="Test your general knowledge"),
@@ -39,18 +44,24 @@ class QuizController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthenticated",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Unauthenticated.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to retrieve categories",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to retrieve categories: Error message")
      *         )
@@ -85,22 +96,29 @@ class QuizController extends Controller
      *     description="Retrieve all active quizzes for a specific category",
      *     tags={"Quiz"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Parameter(
      *         name="categoryId",
      *         in="path",
      *         required=true,
      *         description="Category ID",
+     *
      *         @OA\Schema(type="integer", example=1)
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Quizzes retrieved successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Quizzes retrieved successfully."),
      *             @OA\Property(property="data", type="object",
      *                 @OA\Property(property="quizzes", type="array",
+     *
      *                     @OA\Items(type="object",
+     *
      *                         @OA\Property(property="id", type="integer", example=1),
      *                         @OA\Property(property="title", type="string", example="Basic General Knowledge"),
      *                         @OA\Property(property="description", type="string", example="Test your basic knowledge"),
@@ -114,18 +132,24 @@ class QuizController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=404,
      *         description="Category not found",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Category not found.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to retrieve quizzes",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to retrieve quizzes: Error message")
      *         )
@@ -160,17 +184,22 @@ class QuizController extends Controller
      *     description="Retrieve detailed quiz information including all questions",
      *     tags={"Quiz"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Parameter(
      *         name="quizId",
      *         in="path",
      *         required=true,
      *         description="Quiz ID",
+     *
      *         @OA\Schema(type="integer", example=1)
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Quiz retrieved successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Quiz retrieved successfully."),
      *             @OA\Property(property="data", type="object",
@@ -186,7 +215,9 @@ class QuizController extends Controller
      *                         @OA\Property(property="name", type="string", example="General Knowledge")
      *                     ),
      *                     @OA\Property(property="questions", type="array",
+     *
      *                         @OA\Items(type="object",
+     *
      *                             @OA\Property(property="id", type="integer", example=1),
      *                             @OA\Property(property="question", type="string", example="What is the capital of France?"),
      *                             @OA\Property(property="options", type="array", @OA\Items(type="string", example="Paris")),
@@ -200,18 +231,24 @@ class QuizController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=404,
      *         description="Quiz not found",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Quiz not found.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to retrieve quiz",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to retrieve quiz: Error message")
      *         )
@@ -253,19 +290,26 @@ class QuizController extends Controller
      *     description="Submit quiz answers and get results with scoring",
      *     tags={"Quiz"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Parameter(
      *         name="quizId",
      *         in="path",
      *         required=true,
      *         description="Quiz ID",
+     *
      *         @OA\Schema(type="integer", example=1)
      *     ),
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"answers", "time_taken"},
+     *
      *             @OA\Property(property="answers", type="array",
+     *
      *                 @OA\Items(type="object",
+     *
      *                     @OA\Property(property="question_id", type="integer", example=1),
      *                     @OA\Property(property="answer", type="string", example="Paris")
      *                 )
@@ -273,10 +317,13 @@ class QuizController extends Controller
      *             @OA\Property(property="time_taken", type="integer", example=300, description="Time taken in seconds")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Quiz submitted successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Quiz submitted successfully."),
      *             @OA\Property(property="data", type="object",
@@ -289,7 +336,9 @@ class QuizController extends Controller
      *                 @OA\Property(property="total_questions", type="integer", example=10),
      *                 @OA\Property(property="time_taken", type="integer", example=300),
      *                 @OA\Property(property="answers", type="array",
+     *
      *                     @OA\Items(type="object",
+     *
      *                         @OA\Property(property="question_id", type="integer", example=1),
      *                         @OA\Property(property="question", type="string", example="What is the capital of France?"),
      *                         @OA\Property(property="user_answer", type="string", example="Paris"),
@@ -303,19 +352,25 @@ class QuizController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Validation error",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="The given data was invalid."),
      *             @OA\Property(property="errors", type="object")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to submit quiz",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to submit quiz: Error message")
      *         )
@@ -352,29 +407,38 @@ class QuizController extends Controller
      *     description="Retrieve paginated list of user's quiz results",
      *     tags={"Quiz"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Parameter(
      *         name="page",
      *         in="query",
      *         required=false,
      *         description="Page number",
+     *
      *         @OA\Schema(type="integer", example=1)
      *     ),
+     *
      *     @OA\Parameter(
      *         name="per_page",
      *         in="query",
      *         required=false,
      *         description="Number of items per page",
+     *
      *         @OA\Schema(type="integer", example=10)
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Quiz results retrieved successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Quiz results retrieved successfully."),
      *             @OA\Property(property="data", type="object",
      *                 @OA\Property(property="data", type="array",
+     *
      *                     @OA\Items(type="object",
+     *
      *                         @OA\Property(property="id", type="integer", example=1),
      *                         @OA\Property(property="quiz", type="object",
      *                             @OA\Property(property="id", type="integer", example=1),
@@ -397,10 +461,13 @@ class QuizController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to retrieve quiz results",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to retrieve quiz results: Error message")
      *         )
@@ -437,17 +504,22 @@ class QuizController extends Controller
      *     description="Retrieve detailed information about a specific quiz result",
      *     tags={"Quiz"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Parameter(
      *         name="resultId",
      *         in="path",
      *         required=true,
      *         description="Quiz Result ID",
+     *
      *         @OA\Schema(type="integer", example=1)
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Quiz result details retrieved successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Quiz result details retrieved successfully."),
      *             @OA\Property(property="data", type="object",
@@ -465,7 +537,9 @@ class QuizController extends Controller
      *                     @OA\Property(property="time_taken", type="integer", example=300),
      *                     @OA\Property(property="percentage_score", type="number", format="float", example=80.0),
      *                     @OA\Property(property="answers", type="array",
+     *
      *                         @OA\Items(type="object",
+     *
      *                             @OA\Property(property="question_id", type="integer", example=1),
      *                             @OA\Property(property="question", type="string", example="What is the capital of France?"),
      *                             @OA\Property(property="user_answer", type="string", example="Paris"),
@@ -480,18 +554,24 @@ class QuizController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=404,
      *         description="Quiz result not found",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Quiz result not found.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to retrieve quiz result details",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to retrieve quiz result details: Error message")
      *         )
@@ -534,29 +614,38 @@ class QuizController extends Controller
      *     description="Retrieve top performers for a specific quiz",
      *     tags={"Quiz"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Parameter(
      *         name="quizId",
      *         in="path",
      *         required=true,
      *         description="Quiz ID",
+     *
      *         @OA\Schema(type="integer", example=1)
      *     ),
+     *
      *     @OA\Parameter(
      *         name="limit",
      *         in="query",
      *         required=false,
      *         description="Number of top performers to return",
+     *
      *         @OA\Schema(type="integer", example=10)
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Leaderboard retrieved successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Leaderboard retrieved successfully."),
      *             @OA\Property(property="data", type="object",
      *                 @OA\Property(property="leaderboard", type="array",
+     *
      *                     @OA\Items(type="object",
+     *
      *                         @OA\Property(property="rank", type="integer", example=1),
      *                         @OA\Property(property="user", type="object",
      *                             @OA\Property(property="user_id", type="string", example="60839236"),
@@ -572,10 +661,13 @@ class QuizController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to retrieve leaderboard",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to retrieve leaderboard: Error message")
      *         )
@@ -611,43 +703,56 @@ class QuizController extends Controller
      *     description="Search quizzes by title or description with optional category filter",
      *     tags={"Quiz"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Parameter(
      *         name="query",
      *         in="query",
      *         required=false,
      *         description="Search query",
+     *
      *         @OA\Schema(type="string", example="general knowledge")
      *     ),
+     *
      *     @OA\Parameter(
      *         name="category_id",
      *         in="query",
      *         required=false,
      *         description="Filter by category ID",
+     *
      *         @OA\Schema(type="integer", example=1)
      *     ),
+     *
      *     @OA\Parameter(
      *         name="page",
      *         in="query",
      *         required=false,
      *         description="Page number",
+     *
      *         @OA\Schema(type="integer", example=1)
      *     ),
+     *
      *     @OA\Parameter(
      *         name="per_page",
      *         in="query",
      *         required=false,
      *         description="Number of items per page",
+     *
      *         @OA\Schema(type="integer", example=10)
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Quizzes search completed successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Quizzes search completed successfully."),
      *             @OA\Property(property="data", type="object",
      *                 @OA\Property(property="quizzes", type="array",
+     *
      *                     @OA\Items(type="object",
+     *
      *                         @OA\Property(property="id", type="integer", example=1),
      *                         @OA\Property(property="title", type="string", example="Basic General Knowledge"),
      *                         @OA\Property(property="description", type="string", example="Test your basic knowledge"),
@@ -667,10 +772,13 @@ class QuizController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to search quizzes",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to search quizzes: Error message")
      *         )

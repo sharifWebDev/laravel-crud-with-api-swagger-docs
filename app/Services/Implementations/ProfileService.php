@@ -27,30 +27,47 @@ class ProfileService implements ProfileServiceInterface
             'auth_type' => $user->auth_type,
             'app_version' => $user->app_version,
             'ip_address' => $user->ip_address,
-            'firebase_id' => $user->firebase_id, 'acc_status' => $user->acc_status,
+            'firebase_id' => $user->firebase_id,
+            'acc_status' => $user->acc_status,
             'email_verified_at' => $user->email_verified_at
                 ? $user->email_verified_at->format('d-m-Y')
                 : null,
-
         ];
     }
 
     public function updateProfile(User $user, array $data): User
     {
-        // Remove non-updatable fields
-        unset($data['email'], $data['auth_type'], $data['unique_id']);
+        $oldData = $user->toArray();
 
-        $updatedUser = $this->userRepository->update($user, $data);
+        $updateResult = $this->userRepository->update($user, $data);
 
-        // Dispatch profile updated event for real-time updates
-        event(new ProfileUpdated($updatedUser));
+        if ($updateResult === true) {
+            $updatedUser = $user->fresh();
+        } elseif ($updateResult instanceof User) {
+            $updatedUser = $updateResult;
+        } else {
+            $updatedUser = $user->fresh();
+        }
+
+        // Determine which fields were updated
+        $updatedFields = [];
+        foreach ($data as $field => $value) {
+            if (isset($oldData[$field]) && $oldData[$field] != $value) {
+                $updatedFields[] = $field;
+            }
+        }
+
+        // Broadcast profile update event
+        if (!empty($updatedFields)) {
+            event(new ProfileUpdated($updatedUser, $updatedFields));
+        }
 
         return $updatedUser;
     }
 
     public function changePassword(User $user, string $currentPassword, string $newPassword): void
     {
-        if (! Hash::check($currentPassword, $user->password)) {
+        if (!Hash::check($currentPassword, $user->password)) {
             throw ValidationException::withMessages([
                 'current_password' => ['The current password is incorrect.'],
             ]);
@@ -71,13 +88,22 @@ class ProfileService implements ProfileServiceInterface
     {
         // Handle base64 image or URL
         if (str_starts_with($profileImage, 'data:image')) {
-            // Process base64 image and store it
+
             $profileImage = $this->processBase64Image($profileImage, $user->unique_id);
         }
 
-        $updatedUser = $this->userRepository->update($user, [
+        $updateResult = $this->userRepository->update($user, [
             'profile_img' => $profileImage,
         ]);
+
+        // Handle the return type from repository
+        if ($updateResult === true) {
+            $updatedUser = $user->fresh();
+        } elseif ($updateResult instanceof User) {
+            $updatedUser = $updateResult;
+        } else {
+            $updatedUser = $user->fresh();
+        }
 
         event(new ProfileUpdated($updatedUser));
 
@@ -96,7 +122,7 @@ class ProfileService implements ProfileServiceInterface
             'account_stats' => [
                 'member_since' => $user->created_at->diffForHumans(),
                 'account_status' => $user->acc_status,
-                'email_verified' => ! is_null($user->email_verified_at),
+                'email_verified' => !is_null($user->email_verified_at),
             ],
         ];
     }

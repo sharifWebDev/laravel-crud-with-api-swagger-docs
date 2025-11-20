@@ -14,12 +14,28 @@ class AccountDeletionService implements AccountDeletionServiceInterface
 
     public function requestDeletion(User $user): void
     {
+        $oldStatus = $user->acc_status;
+
         $this->userRepository->markForDeletion($user);
+
+        // Refresh user to get updated data
+        $user->refresh();
+
+        // Broadcast status change
+        event(new UserStatusUpdated($user, $oldStatus, $user->acc_status));
     }
 
     public function cancelDeletion(User $user): void
     {
+        $oldStatus = $user->acc_status;
+
         $this->userRepository->cancelDeletion($user);
+
+        // Refresh user to get updated data
+        $user->refresh();
+
+        // Broadcast status change
+        event(new UserStatusUpdated($user, $oldStatus, $user->acc_status));
     }
 
     public function processScheduledDeletions(): void

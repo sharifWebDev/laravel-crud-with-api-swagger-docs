@@ -24,10 +24,13 @@ class AuthController extends Controller
      *     summary="Register a new user",
      *     description="Creates a new user account and returns authentication token with profile data",
      *     tags={"Authentication"},
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"full_name", "email", "password", "auth_type", "firebase_id"},
+     *
      *             @OA\Property(property="full_name", type="string", maxLength=255, example="John Doe"),
      *             @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
      *             @OA\Property(property="password", type="string", format="password", minLength=8, example="password123"),
@@ -40,10 +43,13 @@ class AuthController extends Controller
      *             @OA\Property(property="ip_address", type="string", format="ipv4", example="192.168.1.1")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="User registered successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Account created successfully."),
      *             @OA\Property(property="data", type="object",
@@ -66,23 +72,30 @@ class AuthController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Validation error",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Validation failed."),
      *             @OA\Property(property="errors", type="object",
      *                 @OA\Property(property="email", type="array",
+     *
      *                     @OA\Items(type="string", example="The email has already been taken.")
      *                 )
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=400,
      *         description="Registration failed",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Registration failed: Error message")
      *         )
@@ -124,18 +137,24 @@ class AuthController extends Controller
      *     summary="User login",
      *     description="Authenticate user with email and password, return access token",
      *     tags={"Authentication"},
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"email", "password"},
+     *
      *             @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
      *             @OA\Property(property="password", type="string", format="password", example="password123")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Login successful",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Sign in successful."),
      *             @OA\Property(property="data", type="object",
@@ -155,18 +174,24 @@ class AuthController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Invalid credentials",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="The provided credentials are incorrect.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Login failed",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Login failed: Error message")
      *         )
@@ -207,10 +232,13 @@ class AuthController extends Controller
      *     summary="Social authentication",
      *     description="Authenticate user using social providers (Google/Apple)",
      *     tags={"Authentication"},
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"full_name", "email", "auth_type", "firebase_id"},
+     *
      *             @OA\Property(property="full_name", type="string", maxLength=255, example="John Doe"),
      *             @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
      *             @OA\Property(property="auth_type", type="string", enum={"gmail", "apple"}, example="gmail"),
@@ -219,10 +247,13 @@ class AuthController extends Controller
      *             @OA\Property(property="app_version", type="string", maxLength=20, example="1.0.0")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Social authentication successful",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Sign in successful."),
      *             @OA\Property(property="data", type="object",
@@ -233,10 +264,13 @@ class AuthController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="New user created via social authentication",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Account created successfully."),
      *             @OA\Property(property="data", type="object",
@@ -247,19 +281,25 @@ class AuthController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Validation error",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Validation failed."),
      *             @OA\Property(property="errors", type="object")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=400,
      *         description="Social authentication failed",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Social authentication failed: Error message")
      *         )
@@ -316,26 +356,35 @@ class AuthController extends Controller
      *     description="Revoke current access token and logout user",
      *     tags={"Authentication"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Logout successful",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Successfully logged out.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthenticated",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Unauthenticated.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Logout failed",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to logout: Error message")
      *         )
@@ -370,26 +419,35 @@ class AuthController extends Controller
      *     description="Revoke all access tokens for the user from all devices",
      *     tags={"Authentication"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Logout from all devices successful",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Successfully logged out from all devices.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthenticated",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Unauthenticated.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Logout failed",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to logout from all devices: Error message")
      *         )
@@ -424,15 +482,20 @@ class AuthController extends Controller
      *     description="Get list of all access tokens for the authenticated user",
      *     tags={"Authentication"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Tokens retrieved successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Tokens retrieved successfully."),
      *             @OA\Property(property="data", type="object",
      *                 @OA\Property(property="tokens", type="array",
+     *
      *                     @OA\Items(type="object",
+     *
      *                         @OA\Property(property="id", type="integer", example=1),
      *                         @OA\Property(property="name", type="string", example="android_auth_token"),
      *                         @OA\Property(property="abilities", type="array", @OA\Items(type="string", example="*")),
@@ -444,18 +507,24 @@ class AuthController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthenticated",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Unauthenticated.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to retrieve tokens",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to retrieve tokens: Error message")
      *         )
@@ -500,41 +569,55 @@ class AuthController extends Controller
      *     description="Revoke a specific access token by ID",
      *     tags={"Authentication"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Parameter(
      *         name="tokenId",
      *         in="path",
      *         required=true,
      *         description="Token ID to revoke",
+     *
      *         @OA\Schema(type="integer", example=1)
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Token revoked successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Token revoked successfully.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=404,
      *         description="Token not found",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Token not found or already revoked.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthenticated",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Unauthenticated.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to revoke token",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to revoke token: Error message")
      *         )
@@ -574,10 +657,13 @@ class AuthController extends Controller
      *     description="Verify if the current access token is valid and get token details",
      *     tags={"Authentication"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Token is valid",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Token is valid."),
      *             @OA\Property(property="data", type="object",
@@ -598,10 +684,13 @@ class AuthController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Token validation failed",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Token validation failed: Error message")
      *         )

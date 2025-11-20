@@ -25,10 +25,13 @@ class ProfileController extends Controller
      *     description="Retrieve the authenticated user's complete profile information",
      *     tags={"Profile"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Profile retrieved successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Successfully user data get."),
      *             @OA\Property(property="data", type="object",
@@ -56,18 +59,24 @@ class ProfileController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthenticated",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Unauthenticated.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to get profile",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to get profile: Error message")
      *         )
@@ -105,9 +114,12 @@ class ProfileController extends Controller
      *     description="Update the authenticated user's profile information",
      *     tags={"Profile"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="full_name", type="string", maxLength=255, example="John Smith"),
      *             @OA\Property(property="phone_country_code", type="string", maxLength=5, example="+1"),
      *             @OA\Property(property="phone_number", type="string", maxLength=15, example="9876543210"),
@@ -116,10 +128,13 @@ class ProfileController extends Controller
      *             @OA\Property(property="ip_address", type="string", format="ipv4", example="192.168.1.100")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Profile updated successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Profile updated successfully."),
      *             @OA\Property(property="data", type="object",
@@ -145,27 +160,36 @@ class ProfileController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Validation error",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="The given data was invalid."),
      *             @OA\Property(property="errors", type="object")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthenticated",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Unauthenticated.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to update profile",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to update profile: Error message")
      *         )
@@ -208,48 +232,64 @@ class ProfileController extends Controller
      *     description="Change the authenticated user's password",
      *     tags={"Profile"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"current_password", "new_password", "new_password_confirmation"},
+     *
      *             @OA\Property(property="current_password", type="string", format="password", example="oldpassword123"),
      *             @OA\Property(property="new_password", type="string", format="password", minLength=8, example="newpassword456"),
      *             @OA\Property(property="new_password_confirmation", type="string", format="password", example="newpassword456")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Password changed successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Password changed successfully.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Validation error",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="The current password is incorrect."),
      *             @OA\Property(property="errors", type="object",
      *                 @OA\Property(property="current_password", type="array",
+     *
      *                     @OA\Items(type="string", example="The current password is incorrect.")
      *                 )
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthenticated",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Unauthenticated.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to change password",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to change password: Error message")
      *         )
@@ -293,17 +333,23 @@ class ProfileController extends Controller
      *     description="Update the authenticated user's profile image (base64 or URL)",
      *     tags={"Profile"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"profile_img"},
+     *
      *             @OA\Property(property="profile_img", type="string", description="Base64 encoded image or image URL", example="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ...")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Profile image updated successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Profile image updated successfully."),
      *             @OA\Property(property="data", type="object",
@@ -311,26 +357,35 @@ class ProfileController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Validation error",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="The profile img field is required.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthenticated",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Unauthenticated.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to update profile image",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to update profile image: Error message")
      *         )
@@ -377,10 +432,13 @@ class ProfileController extends Controller
      *     description="Retrieve the authenticated user's activity statistics and quiz performance",
      *     tags={"Profile"},
      *     security={{"bearerAuth":{}}},
+     *
      *     @OA\Response(
      *         response=200,
      *         description="User stats retrieved successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="User stats retrieved successfully."),
      *             @OA\Property(property="data", type="object",
@@ -398,18 +456,24 @@ class ProfileController extends Controller
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthenticated",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Unauthenticated.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to get user stats",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to get user stats: Error message")
      *         )

@@ -24,42 +24,57 @@ class OTPController extends Controller
      *     summary="Send OTP to user's email",
      *     description="Send a one-time password (OTP) to the user's email for verification purposes",
      *     tags={"OTP"},
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"email"},
+     *
      *             @OA\Property(property="email", type="string", format="email", example="user@example.com"),
      *             @OA\Property(property="purpose", type="string", enum={"verification", "reset", "change_email"}, example="verification", description="Purpose of the OTP request")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OTP sent successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="OTP sent successfully.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=404,
      *         description="User not found",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="User not found.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Validation error",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="The email field is required.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to send OTP",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to send OTP: Error message")
      *         )
@@ -115,43 +130,58 @@ class OTPController extends Controller
      *     summary="Verify OTP",
      *     description="Verify the one-time password (OTP) sent to user's email",
      *     tags={"OTP"},
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"email", "otp"},
+     *
      *             @OA\Property(property="email", type="string", format="email", example="user@example.com"),
      *             @OA\Property(property="otp", type="string", minLength=6, maxLength=6, example="123456", description="6-digit OTP code"),
      *             @OA\Property(property="purpose", type="string", enum={"verification", "reset", "change_email"}, example="verification", description="Purpose for which OTP was sent")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OTP verified successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="OTP verified successfully.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=404,
      *         description="User not found",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="User not found.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Invalid or expired OTP",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Invalid or expired OTP.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to verify OTP",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to verify OTP: Error message")
      *         )
@@ -221,50 +251,68 @@ class OTPController extends Controller
      *     summary="Resend OTP",
      *     description="Resend a one-time password (OTP) to the user's email",
      *     tags={"OTP"},
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"email"},
+     *
      *             @OA\Property(property="email", type="string", format="email", example="user@example.com"),
      *             @OA\Property(property="purpose", type="string", enum={"verification", "reset", "change_email"}, example="verification", description="Purpose of the OTP request")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="OTP resent successfully",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="OTP resent successfully.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=404,
      *         description="User not found",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="User not found.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Validation error",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="The email field is required.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=429,
      *         description="Too many requests",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Please wait before requesting a new OTP.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Failed to resend OTP",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Failed to resend OTP: Error message")
      *         )

@@ -21,7 +21,9 @@ class AccountDeletionController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="Account deletion countdown started",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Account delete request successful. Account will be permanently deleted after 7 days."),
      *             @OA\Property(property="data", type="object",
@@ -35,7 +37,9 @@ class AccountDeletionController extends Controller
      *     @OA\Response(
      *         response=400,
      *         description="Deletion already requested or account already deleted",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="error"),
      *             @OA\Property(property="message", type="string", example="Account deletion is already pending.")
      *         )
@@ -92,7 +96,9 @@ class AccountDeletionController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="Successfully fetched account status",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="status", type="string", example="success"),
      *             @OA\Property(property="message", type="string", example="Successfully get the account status"),
      *             @OA\Property(property="data", type="object",
@@ -146,7 +152,6 @@ class AccountDeletionController extends Controller
      *         response=200,
      *         description="Successfully canceled account deletion"
      *     ),
-     *
      *     @OA\Response(
      *         response=400,
      *         description="No pending deletion request found"
@@ -184,6 +189,7 @@ class AccountDeletionController extends Controller
      * @OA\Schema(
      *     schema="UserProfile",
      *     type="object",
+     *
      *     @OA\Property(property="user_id", type="string", example="USR123456"),
      *     @OA\Property(property="full_name", type="string", example="Sharif Uddin"),
      *     @OA\Property(property="email", type="string", example="example@gmail.com"),
