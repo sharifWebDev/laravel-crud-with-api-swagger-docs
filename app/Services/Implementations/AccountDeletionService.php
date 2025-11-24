@@ -2,6 +2,7 @@
 
 namespace App\Services\Implementations;
 
+use App\Events\UserStatusUpdated;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Services\Contracts\AccountDeletionServiceInterface;
